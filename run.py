@@ -248,7 +248,7 @@ def cmd_build_baseline(args: argparse.Namespace) -> None:
     shots = step_segment(meta)
     shots = step_keyframes(shots)
     emb_batch = BatchEmbedder()
-    emb = emb_batch.encode_all(shots, [], target_video_id=args.name, baseline_video_id="", use_cache=True)[0]
+    emb = emb_batch.encode_single(shots, group_id=args.name, use_cache=True)
     step_build_baseline(emb, [s.shot_id for s in shots], args.name, strategy=args.strategy)
 
 

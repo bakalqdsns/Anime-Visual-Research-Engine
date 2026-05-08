@@ -230,3 +230,16 @@ class BatchEmbedder:
             )
         logger.info(f"Saved {embeddings.shape[0]} embeddings to {cache_path}")
         return embeddings
+
+    def encode_single(
+        self,
+        shots: List[Shot],
+        group_id: str = "single",
+        use_cache: bool = True,
+    ) -> np.ndarray:
+        """Encode a single group of shots (convenience method).
+
+        Returns only the target embeddings (no baseline).
+        """
+        emb, _ = self.encode_all(shots, [], target_video_id=group_id, baseline_video_id="", use_cache=use_cache)
+        return emb
